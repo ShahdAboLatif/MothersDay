@@ -33,6 +33,38 @@
     background-blend-mode: multiply;
     background-size: cover;
 }
+
+        @media screen and (max-width: 480px) {
+            .envelope {
+                width: 240px;
+                height: 165px;
+            }
+            .flap {
+                height: 82.5px;
+            }
+            .letter {
+                width: 195px;
+                height: 120px;
+                top: 22.5px;
+                left: 22.5px;
+                font-size: 24px;
+            }
+            .envelope.open .letter {
+                transform: translateY(-120px) translateX(15px) rotate(-5deg);
+            }
+            .heart {
+                width: 15px;
+                height: 15px;
+            }
+            .heart::before,
+            .heart::after {
+                width: 15px;
+                height: 22.5px;
+            }
+            .heart::after {
+                left: -15px;
+            }
+        }
         .flap {
             position: absolute;
             top: 0;
@@ -117,6 +149,17 @@
                 opacity: 0.8;
             }
         }
+        .footer {
+            position: fixed;
+            bottom: 20px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            color: white;
+            font-family: 'Arial', sans-serif;
+            font-size: 14px;
+            z-index: 4;
+        }
     </style>
 </head>
 <body>
@@ -126,6 +169,7 @@
             Happy Mothers<br> Day<br>I Love You Mom❤
         </div>
     </div>
+    <div class="footer">Made with love by Shahd 🤍</div>
     <script>
         const envelope = document.getElementById('envelope');
         let isClosing = false;
