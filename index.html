@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Day MOM!</title>
-    <!-- Import Google Fonts for Allura -->
     <link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet">
     <style>
         body {
@@ -17,53 +16,20 @@
             position: relative;
         }
         .envelope {
-    width: 320px;
-    height: 220px;
-    background: #A35C7A; /* Light parchment color */
-    position: relative;
-    cursor: pointer;
-    border: 2px solid rgba(0, 0, 0, 0.1); /* Subtle paper edge */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Shadow for depth */
-    border-radius: 5px;
-    z-index: 1;
-    /* Old paper texture */
-    background-image: 
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%),
-        url('https://www.transparenttextures.com/patterns/aged-paper.png'); /* Paper texture */
-    background-blend-mode: multiply;
-    background-size: cover;
-}
-
-        @media screen and (max-width: 480px) {
-            .envelope {
-                width: 240px;
-                height: 165px;
-            }
-            .flap {
-                height: 82.5px;
-            }
-            .letter {
-                width: 232px;
-                height: 157px;
-                top: 4px;
-                left: 4px;
-                font-size: 24px;
-            }
-            .envelope.open .letter {
-                transform: translateY(-157px) translateX(15px) rotate(-5deg);
-            }
-            .heart {
-                width: 15px;
-                height: 15px;
-            }
-            .heart::before,
-            .heart::after {
-                width: 15px;
-                height: 22.5px;
-            }
-            .heart::after {
-                left: -15px;
-            }
+            width: 320px;
+            height: 220px;
+            background: #A35C7A;
+            position: relative;
+            cursor: pointer;
+            border: 2px solid rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            border-radius: 5px;
+            z-index: 1;
+            background-image: 
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%),
+                url('https://www.transparenttextures.com/patterns/aged-paper.png');
+            background-blend-mode: multiply;
+            background-size: cover;
         }
         .flap {
             position: absolute;
@@ -76,7 +42,7 @@
             transition: transform 0.4s ease-in-out;
             transform-origin: top;
             z-index: 2;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow on flap */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
         .envelope.open .flap {
             transform: rotateX(-180deg);
@@ -129,7 +95,7 @@
             position: absolute;
             width: 20px;
             height: 30px;
-            background: #C890A7; /* Heart color */
+            background: #C890A7;
             border-radius: 10px 10px 0 0;
             transform: rotate(-45deg);
             transform-origin: 0 100%;
@@ -140,24 +106,53 @@
             transform-origin: 100% 100%;
         }
         @keyframes float {
-            0%, 100% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 1;
+            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            50% { transform: translateY(-20px) rotate(10deg); opacity: 0.8; }
+        }
+
+        /* MOBILE STYLES (AFTER DESKTOP STYLES) */
+        @media (max-width: 480px) {
+            .envelope {
+                width: 240px;
+                height: 165px;
             }
-            50% {
-                transform: translateY(-20px) rotate(10deg);
-                opacity: 0.8;
+            .flap {
+                height: 82.5px;
+            }
+            .letter {
+                width: 200px;
+                height: 120px;
+                top: 15px;
+                left: 15px;
+                font-size: 20px;
+                padding: 8px;
+            }
+            .envelope.open .letter {
+                transform: translateY(-80px) translateX(10px) rotate(-5deg);
+            }
+            .heart {
+                width: 15px;
+                height: 15px;
+            }
+            .heart::before,
+            .heart::after {
+                width: 15px;
+                height: 22.5px;
+            }
+            .heart::after {
+                left: -15px;
             }
         }
         .footer {
             position: fixed;
-            bottom: 20px;
+            bottom: 10px;
             left: 0;
             width: 100%;
             text-align: center;
+            font-family: 'Courier New';
+            font-size: 15px;
             color: white;
-            font-family: 'Arial', sans-serif;
-            font-size: 14px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
             z-index: 4;
         }
     </style>
@@ -169,7 +164,7 @@
             Happy Mothers<br> Day<br>I Love You Mom❤
         </div>
     </div>
-    <div class="footer">Made with love by Shahd 🤍</div>
+    <div class="footer">Made With 🤍 By Shahd</div>
     <script>
         const envelope = document.getElementById('envelope');
         let isClosing = false;
@@ -177,35 +172,30 @@
         envelope.addEventListener('click', () => {
             if (!isClosing) {
                 if (!envelope.classList.contains('open')) {
-                    // Open the envelope and slide out the letter
                     envelope.classList.add('open');
                 } else {
-                    // Start closing sequence
                     isClosing = true;
                     envelope.classList.add('closing');
                     setTimeout(() => {
                         envelope.classList.remove('open');
                         envelope.classList.remove('closing');
                         isClosing = false;
-                    }, 500); // 0.5-second delay before closing
+                    }, 500);
                 }
             }
         });
 
-        // Create floating hearts
         function createHearts() {
-            for (let i = 0; i < 30; i++) { // Fewer hearts for better performance
+            for (let i = 0; i < 30; i++) {
                 const heart = document.createElement('div');
                 heart.className = 'heart';
                 heart.style.left = Math.random() * 100 + 'vw';
                 heart.style.top = Math.random() * 100 + 'vh';
-                heart.style.animationDelay = Math.random() * 6 + 's'; // Randomize animation delay
-                heart.style.fontSize = Math.random() * 20 + 10 + 'px'; // Randomize heart size
+                heart.style.animationDelay = Math.random() * 6 + 's';
+                heart.style.fontSize = Math.random() * 20 + 10 + 'px';
                 document.body.appendChild(heart);
             }
         }
-
-        // Call the function to create hearts when the page loads
         createHearts();
     </script>
 </body>
